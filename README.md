@@ -28,7 +28,7 @@ Domine o poderoso Ritual Profano, disponível em momentos cruciais, para desenca
 ## Inimigos
 
 :skull: 
-- **Ovelhas:** As mais fracas entre os inimigos, representadas por [descrição visual dos assets, se aplicável].
+- **Ovelhas:** As mais fracas entre os inimigos.
 - **Construtores:** Inimigos que apresentam um desafio intermediário, requerendo estratégia para serem derrotados.
 - **Dinamite:** Um pouco mais fortes que os construtores.
 - **Goblin:** Os mais fortes e desafiadores de todos os inimigos, representando uma ameaça significativa que testará ao máximo as habilidades do jogador.
