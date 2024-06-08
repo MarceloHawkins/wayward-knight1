@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://i6t4hqdwrkhr"]
+
+[ext_resource type="PackedScene" uid="uid://cplceifxicjui" path="res://Enemies/goblin.tscn" id="2_2muuj"]
+[ext_resource type="PackedScene" uid="uid://b341j8div5d6y" path="res://Enemies/goblinD.tscn" id="3_wxspc"]
+[ext_resource type="PackedScene" uid="uid://df1actw4woxk2" path="res://Enemies/pawn.tscn" id="4_ffvjn"]
+[ext_resource type="PackedScene" uid="uid://sqtk3l64ormc" path="res://Enemies/sheep.tscn" id="5_pd76g"]
+
+[sub_resource type="GDScript" id="GDScript_87tsu"]
+script/source = "class_name MobSpa
+extends Node2D
+
+@export var creatures: Array[PackedScene]
+@export var mobs_per_minute: float = 60.0
+
+@onready var path_floow_2d: PathFollow2D = %PathFollow2D
+var cooldown: float = 0.0
+
+func _process(delta: float):
+	#Temporizador(cooldown)
+	cooldown -= delta
+	if cooldown > 0: return
+	
+	#Frequência: Monstros por minuto
+	var interval = 60.0 / mobs_per_minute
+	cooldown = interval
+	
+	#Checar se o ponto é válido
+	var point = get_point()
+	var world_state = get_world_2d().direct_space_state
+	var parameters = PhysicsPointQueryParameters2D.new()
+	parameters.position = point
+	parameters.collision_mask = 0b1001
+	var result: Array = world_state.intersect_point(parameters, 1 )
+	if not result.is_empty(): return
+	
+	#Instanciar uma criatura aleatória
+	var index = randi_range(0, creatures.size() - 1)
+	var creature_scene = creatures[index]
+	var creature = creature_scene.instantiate()
+	creature.global_position = point
+	get_parent().add_child(creature)
+	
+	
+
+func get_point() -> Vector2:
+	path_floow_2d.progress_ratio = randf()
+	return path_floow_2d.global_position
+"
+
+[sub_resource type="Curve2D" id="Curve2D_3vqdu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -692, -466, 0, 0, 0, 0, 895, -454, 0, 0, 0, 0, 910, -445, 0, 0, 0, 0, 984, 629, 0, 0, 0, 0, -709, 629, 0, 0, 0, 0, -764, 636, 0, 0, 0, 0, 904, 574, 0, 0, 0, 0, 950, 602, 0, 0, 0, 0, 842, 563, 0, 0, 0, 0, -728, 563, 0, 0, 0, 0, -692, -457, 0, 0, 0, 0, -735, 585, 0, 0, 0, 0, 888, 560, 0, 0, 0, 0, 886, 574, 0, 0, 0, 0, 902, 585)
+}
+point_count = 15
+
+[node name="MobSpawner" type="Node2D"]
+position = Vector2(529, 310)
+script = SubResource("GDScript_87tsu")
+creatures = Array[PackedScene]([ExtResource("2_2muuj"), ExtResource("3_wxspc"), ExtResource("4_ffvjn"), ExtResource("5_pd76g")])
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_3vqdu")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(-692, -466)
+rotation = 0.00756129
+
+[node name="_Timer_23613" type="Timer" parent="Path2D/PathFollow2D"]
+wait_time = 0.2
+one_shot = true

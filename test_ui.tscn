@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://byu01uv0lv0vg"]
+
+[ext_resource type="PackedScene" uid="uid://bq8u40w4s87y" path="res://Player/player.tscn" id="1_trne5"]
+[ext_resource type="PackedScene" uid="uid://dq7wtp347q4tw" path="res://ui/game_ui.tscn" id="2_yh7r2"]
+[ext_resource type="PackedScene" uid="uid://cplceifxicjui" path="res://Enemies/goblin.tscn" id="3_jptf4"]
+[ext_resource type="PackedScene" uid="uid://ccid7vuw10b86" path="res://misc/meat.tscn" id="4_0a1e1"]
+[ext_resource type="PackedScene" uid="uid://df1actw4woxk2" path="res://Enemies/pawn.tscn" id="5_8wujk"]
+[ext_resource type="PackedScene" uid="uid://sqtk3l64ormc" path="res://Enemies/sheep.tscn" id="6_t6liv"]
+[ext_resource type="PackedScene" uid="uid://b341j8div5d6y" path="res://Enemies/goblinD.tscn" id="7_01ujd"]
+
+[node name="TestUi" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_trne5")]
+position = Vector2(551, 351)
+
+[node name="GameUI" parent="." instance=ExtResource("2_yh7r2")]
+
+[node name="Goblin" parent="." instance=ExtResource("3_jptf4")]
+position = Vector2(941, 302)
+
+[node name="Meat" parent="." instance=ExtResource("4_0a1e1")]
+position = Vector2(320, 75)
+
+[node name="Pawn" parent="." instance=ExtResource("5_8wujk")]
+position = Vector2(299, 579)
+
+[node name="Sheep" parent="." instance=ExtResource("6_t6liv")]
+position = Vector2(552, 572)
+
+[node name="Sheep2" parent="." instance=ExtResource("6_t6liv")]
+position = Vector2(776, 579)
+
+[node name="Pawn2" parent="." instance=ExtResource("7_01ujd")]
+position = Vector2(170, 301)
+
+[node name="Pawn3" parent="." instance=ExtResource("5_8wujk")]
+position = Vector2(108, 460)
+
+[node name="Pawn4" parent="." instance=ExtResource("7_01ujd")]
+position = Vector2(466, 109)
+
+[node name="Meat2" parent="." instance=ExtResource("4_0a1e1")]
+position = Vector2(335, 252)
+
+[node name="Meat3" parent="." instance=ExtResource("4_0a1e1")]
+position = Vector2(746, 144)
+
+[node name="Meat4" parent="." instance=ExtResource("4_0a1e1")]
+position = Vector2(335, 369)
